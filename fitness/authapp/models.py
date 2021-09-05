@@ -1,8 +1,9 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
+from django.db import models
 
-# Create your models here.
+
 class UserProfile(AbstractUser):
 
     GENDER_MALE = 'm'
@@ -14,3 +15,9 @@ class UserProfile(AbstractUser):
 
     date_birth = models.DateField(_('birth date'), null=True)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, blank=True)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{7,15}$',
+                                 message="Номер телефона необходимо вводить в формате: '+799999999'. Допускается до "
+                                         "15 цифр.")
+    phone_number = models.CharField(verbose_name='номер телефона', validators=[phone_regex], max_length=17, blank=True)
+    address = models.CharField(verbose_name='адрес', max_length=128)
+    diseases = models.TextField()
