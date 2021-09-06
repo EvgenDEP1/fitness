@@ -1,5 +1,4 @@
 from django.core.validators import RegexValidator
-from datetime import date
 from django.db import models
 
 
@@ -11,6 +10,10 @@ class Service(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    class Meta:
+        verbose_name = 'услуга'
+        verbose_name_plural = 'услуги'
 
 
 class Trainer(models.Model):
@@ -27,19 +30,23 @@ class Trainer(models.Model):
     patronymic = models.CharField(verbose_name='отчество', max_length=32, blank=True)
     gender = models.CharField(verbose_name='пол', max_length=1, choices=GENDER_CHOICES, blank=True)
     address = models.CharField(verbose_name='адрес', max_length=128)
-    phone_regex = RegexValidator(regex=r'^\+?7?\d{10}$',
-                                 message="Номер телефона необходимо вводить в формате: '+799999999'. Допускается до "
-                                         "15 цифр.")
+    phone_regex = RegexValidator(regex=r'^\d{10}$',
+                                 message="Ввеите последние 10 цифр номера телефона. в формате: '1234567891'.")
     phone_number = models.CharField(verbose_name='номер телефона', validators=[phone_regex], max_length=17, blank=True)
 
     def __str__(self):
         return f'{self.name}: {self.surname}: {self.patronymic}'
-    # стаж
-    # работы, оклад
+
+    class Meta:
+        verbose_name = 'Тренер'
+        verbose_name_plural = 'Тренеры'
 
 
 class Recording(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     trainer = models.ManyToManyField(Trainer, verbose_name='тренер')
     user = models.ManyToManyField('authapp.UserProfile', related_name='serv_user')
-    date = models.DateTimeField(default=date.today)
+
+    class Meta:
+        verbose_name = 'запись'
+        verbose_name_plural = 'записи'

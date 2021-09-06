@@ -15,9 +15,8 @@ class UserProfile(AbstractUser):
 
     date_birth = models.DateField(_('birth date'), null=True)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, blank=True)
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{7,15}$',
-                                 message="Номер телефона необходимо вводить в формате: '+799999999'. Допускается до "
-                                         "15 цифр.")
+    phone_regex = RegexValidator(regex=r'^\d{10}$',
+                                 message="Ввеите последние 10 цифр номера телефона. в формате: '1234567891'.")
     phone_number = models.CharField(verbose_name='номер телефона', validators=[phone_regex], max_length=17, blank=True)
     address = models.CharField(verbose_name='адрес', max_length=128)
     diseases = models.TextField()
