@@ -33,7 +33,7 @@ class Trainer(models.Model):
     address = models.CharField(verbose_name='адрес', max_length=128)
     phone_regex = RegexValidator(regex=r'^\d{10}$',
                                  message="Введите последние 10 цифр номера телефона. в формате: '1234567891'.")
-    phone_number = models.CharField(verbose_name='номер телефона', validators=[phone_regex], max_length=17, blank=True)
+    phone_number = models.CharField(verbose_name='номер телефона', validators=[phone_regex], max_length=12, blank=True)
 
     def __str__(self):
         return f'{self.name}: {self.surname}: {self.patronymic}'
