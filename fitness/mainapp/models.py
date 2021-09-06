@@ -4,7 +4,8 @@ from django.db import models
 
 class Service(models.Model):
     name = models.CharField(verbose_name='название услуги', max_length=128, unique=True)
-    price = models.DecimalField(verbose_name='цена', max_digits=6, decimal_places=2, default=0)
+    price = models.DecimalField(verbose_name='стоимость занятия за час в рублях',
+                                max_digits=6, decimal_places=2, default=0)
     desc = models.TextField()
     status = models.BooleanField(default=False)
 
