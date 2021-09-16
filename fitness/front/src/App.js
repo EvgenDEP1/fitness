@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 
 class App extends React.Component {
@@ -13,9 +15,11 @@ class App extends React.Component {
 
     render() {
         console.log('state', this.state);
-        return(
+        return (
             <div>
+                <Header />
                 Fitness
+                <Footer />
             </div>
         )
     }
