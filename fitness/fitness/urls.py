@@ -26,7 +26,6 @@ router.register('services', ServiceViewSet)
 
 urlpatterns = [
     path('',  mainapp.ServiceList.as_view()),
-    # path('service/tasks/',  mainapp.ServiceTaskList.as_view()),
 
     path('api/', include(router.urls)),
 
