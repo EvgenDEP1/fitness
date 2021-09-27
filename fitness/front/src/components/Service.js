@@ -29,4 +29,21 @@ const ServiceList = ({services}) => {
     )
 }
 
-export default ServiceList;
+const ServiceListExt = ({services}) => {
+    console.log('services:', services);
+    return (
+        <table className={"services-list"}>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {services.map((service) => <Service key={service.name} service={service}/>)}
+            </tbody>
+        </table>
+    )
+}
+
+export default ServiceListExt;

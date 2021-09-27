@@ -6,7 +6,8 @@ import ServiceList from "./components/Service";
 
 const servicesMock = [
     {'name': "Услуга 1", 'price': "200"},
-    {'name': "Услуга 2", 'price': "200"}
+    {'name': "Услуга 2", 'price': "200"},
+    {'name': "Услуга 3", 'price': "200"}
 ];
 
 
