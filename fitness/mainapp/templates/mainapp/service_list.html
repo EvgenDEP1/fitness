@@ -5,8 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-{% for service in service_list %}
-    {{service}}
-{% endfor %}
+<ul>
+    {% for service in service_list %}
+        <li>{{service}}</li>
+    {% endfor %}
+</ul>
 </body>
 </html>

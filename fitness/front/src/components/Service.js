@@ -1,5 +1,5 @@
 const Service = ({service}) => {
-    console.log('service:', service);
+    // console.log('service:', service);
     return (
         <tr className="service-row">
             <td>
@@ -13,7 +13,7 @@ const Service = ({service}) => {
 }
 
 const ServiceList = ({services}) => {
-    console.log('services:', services);
+    // console.log('services:', services);
     return (
         <table className={"service-list"}>
             <thead>
@@ -30,7 +30,7 @@ const ServiceList = ({services}) => {
 }
 
 const ServiceListExt = ({services}) => {
-    console.log('services:', services);
+    // console.log('services:', services);
     return (
         <table className={"services-list"}>
             <thead>
