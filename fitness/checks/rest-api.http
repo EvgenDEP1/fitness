@@ -1,3 +1,7 @@
-GET http://localhost:8000/api/services/
+#GET http://localhost:8000/api/services/
+#Accept: application/json
+
+
+GET http://localhost:8000/api/users/
 Accept: application/json
 

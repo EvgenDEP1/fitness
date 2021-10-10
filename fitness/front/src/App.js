@@ -11,29 +11,142 @@ import ServiceList from "./components/Service";
 
 const usersMock = [
     {
-        "id": 1,
-        "username": "kpk",
-        "email": "",
-        "first_name": "",
-        "last_name": "",
-        "gender": "",
-        "date_birth": null
-    },
-    {
-        "id": 2,
-        "username": "user1",
-        "email": "",
-        "first_name": "",
-        "last_name": "",
-        "gender": "",
-        "date_birth": null
-    }
+    "id": 1,
+    "username": "user1",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 2,
+    "username": "user2",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 3,
+    "username": "user3",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 4,
+    "username": "user4",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 5,
+    "username": "user5",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 6,
+    "username": "user6",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 7,
+    "username": "user7",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 8,
+    "username": "user8",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 9,
+    "username": "user9",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 10,
+    "username": "user10",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  },
+  {
+    "id": 11,
+    "username": "kpk",
+    "email": "",
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "date_birth": null
+  }
 ];
 
 const servicesMock = [
-    {'name': "Услуга 1", 'price': "200"},
-    {'name': "Услуга 2", 'price': "200"},
-    {'name': "Услуга 3", 'price': "200"}
+    {
+    "id": 1,
+    "name": "Услуга 1",
+    "price": "200.00",
+    "desc": "тест",
+    "status": false
+  },
+  {
+    "id": 2,
+    "name": "Услуга 2",
+    "price": "200.00",
+    "desc": "тест",
+    "status": false
+  },
+  {
+    "id": 3,
+    "name": "Услуга 3",
+    "price": "200.00",
+    "desc": "тест",
+    "status": false
+  },
+  {
+    "id": 4,
+    "name": "Услуга 4",
+    "price": "200.00",
+    "desc": "тест",
+    "status": false
+  },
+  {
+    "id": 5,
+    "name": "Услуга 5",
+    "price": "200.00",
+    "desc": "тест",
+    "status": false
+  }
 ];
 
 
@@ -59,28 +172,6 @@ class App extends React.Component {
             <div className="main">
                 <Router>
                     <Header/>
-                    <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-                        <Link to={"/"}
-                              className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                            Fitness
-                        </Link>
-                        <ul className="nav nav-pills">
-                            <li className="nav-item">
-                                <Link to={"/users"} className="nav-link">
-                                    Users
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to={"/services"} className="nav-link">
-                                    Services
-                                </Link>
-                            </li>
-                        </ul>
-                    </header>
-
-                    <Route exact path="/">
-                        <Header/>
-                    </Route>
                     <Route exact path="/users">
                         <UserList users={this.state.users}/>
                     </Route>
