@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
-from mainapp.models import Service
-from authapp.models import UserProfile
+from mainapp.models import Service, Recording, Trainer
+# from authapp.models import UserProfile
 
 
 class ServiceSerializer(ModelSerializer):
@@ -10,12 +10,24 @@ class ServiceSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class UserProfileSerializer(ModelSerializer):
+class RecordingSerializer(ModelSerializer):
     class Meta:
-        model = UserProfile
-        fields = (
-            'id',
-            'first_name',
-            'last_name',
-            'username',
-        )
+        model = Recording
+        fields = '__all__'
+
+
+class TrainerSerializer(ModelSerializer):
+    class Meta:
+        model = Trainer
+        fields = '__all__'
+
+
+# class UserProfileSerializer(ModelSerializer):
+#     class Meta:
+#         model = UserProfile
+#         fields = (
+#             'id',
+#             'first_name',
+#             'last_name',
+#             'username',
+#         )

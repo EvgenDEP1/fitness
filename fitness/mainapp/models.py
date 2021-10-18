@@ -47,6 +47,8 @@ class Recording(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     trainer = models.ManyToManyField(Trainer, verbose_name='тренер')
     user = models.ManyToManyField('authapp.UserProfile', related_name='serv_user')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'запись'

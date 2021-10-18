@@ -23,10 +23,14 @@ import mainapp.views as mainapp
 router = DefaultRouter()
 router.register('users', authapp.UserViewSet)
 router.register('services', mainapp.ServiceViewSet)
+router.register('recordings', mainapp.RecordingViewSet)
+router.register('trainers', mainapp.TrainerViewSet)
 
 
 urlpatterns = [
-    path('',  mainapp.ServiceList.as_view()),
+    path('service/',  mainapp.ServiceList.as_view()),
+    path('recording/',  mainapp.RecordingList.as_view()),
+    path('trainer/',  mainapp.RecordingList.as_view()),
 
     path('api/', include(router.urls)),
 

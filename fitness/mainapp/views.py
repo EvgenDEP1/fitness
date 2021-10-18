@@ -1,9 +1,8 @@
 from django.views.generic import ListView
 from rest_framework.viewsets import ModelViewSet
 
-from authapp.models import UserProfile
-from mainapp.models import Service
-from mainapp.serializers import ServiceSerializer, UserProfileSerializer
+from mainapp.models import Service, Recording, Trainer
+from mainapp.serializers import ServiceSerializer, RecordingSerializer, TrainerSerializer
 
 
 class ServiceList(ListView):
@@ -11,7 +10,11 @@ class ServiceList(ListView):
 
 
 class RecordingList(ListView):
-    model = Service
+    model = Recording
+
+
+class TrainerList(ListView):
+    model = Trainer
 
 
 class ServiceViewSet(ModelViewSet):
@@ -19,6 +22,12 @@ class ServiceViewSet(ModelViewSet):
     serializer_class = ServiceSerializer
 
 
-class UserProfileViewSet(ModelViewSet):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
+class RecordingViewSet(ModelViewSet):
+    queryset = Recording.objects.all()
+    serializer_class = RecordingSerializer
+
+
+class TrainerViewSet(ModelViewSet):
+    queryset = Trainer.objects.all()
+    serializer_class = TrainerSerializer
+

@@ -6,7 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import UserList from "./components/User";
-import ServiceList from "./components/Service";
+import ServiceList from "./components/ServiceList";
+import ServiceDetail from "./components/ServiceDetail";
+import RecordingList from "./components/RecordingList";
+import RecordingDetail from "./components/RecordingDetail";
+import TrainerList from "./components/TrainerList";
+import axios from "axios";
 
 
 const usersMock = [
@@ -149,20 +154,164 @@ const servicesMock = [
   }
 ];
 
+const recordingsMock = [
+    {
+    "id": 1,
+    "created": "2021-10-11T05:33:54.795389Z",
+    "updated": "2021-10-11T05:33:54.863361Z",
+    "service": 1,
+    "trainer": [
+      1
+    ],
+    "user": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 2,
+    "created": "2021-10-11T05:33:54.795389Z",
+    "updated": "2021-10-11T05:33:54.863361Z",
+    "service": 2,
+    "trainer": [
+      2,
+      3,
+      4
+    ],
+    "user": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "id": 3,
+    "created": "2021-10-11T05:33:54.795389Z",
+    "updated": "2021-10-11T05:33:54.863361Z",
+    "service": 3,
+    "trainer": [
+      5
+    ],
+    "user": [
+      6
+    ]
+  },
+  {
+    "id": 4,
+    "created": "2021-10-11T05:33:54.795389Z",
+    "updated": "2021-10-11T05:33:54.863361Z",
+    "service": 4,
+    "trainer": [
+      2
+    ],
+    "user": [
+      3,
+      7
+    ]
+  },
+  {
+    "id": 5,
+    "created": "2021-10-11T05:33:54.795389Z",
+    "updated": "2021-10-11T05:33:54.863361Z",
+    "service": 5,
+    "trainer": [
+      4
+    ],
+    "user": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  }
+];
+
+const trainersMock = [
+    {
+    "id": 1,
+    "name": "Имя 1",
+    "surname": "Фамилия 1",
+    "patronymic": "Отчество 1",
+    "gender": "",
+    "address": "адрес",
+    "phone_number": ""
+  },
+  {
+    "id": 2,
+    "name": "Имя 2",
+    "surname": "Фамилия 2",
+    "patronymic": "Отчество 2",
+    "gender": "",
+    "address": "адрес",
+    "phone_number": ""
+  },
+  {
+    "id": 3,
+    "name": "Имя 3",
+    "surname": "Фамилия 3",
+    "patronymic": "Отчество 3",
+    "gender": "",
+    "address": "адрес",
+    "phone_number": ""
+  },
+  {
+    "id": 4,
+    "name": "Имя 4",
+    "surname": "Фамилия 4",
+    "patronymic": "Отчество 4",
+    "gender": "",
+    "address": "адрес",
+    "phone_number": ""
+  },
+  {
+    "id": 5,
+    "name": "Имя 5",
+    "surname": "Фамилия 5",
+    "patronymic": "Отчество 5",
+    "gender": "",
+    "address": "адрес",
+    "phone_number": "9046587416"
+  },
+];
+
+
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             users: [],
-            services: []
+            services: [],
+            recordings: [],
+            trainers: []
         };
     }
 
     componentDidMount() {
+        axios
+            .get("http://localhost:8000/api/users/")
+            .then((result) => {
+                console.log('result', result)
+            })
+            .catch((error) => console.log(error));
+
         this.setState({
                 users: usersMock,
                 services: servicesMock,
+                recordings: recordingsMock,
+                trainers: trainersMock
             })
     }
 
@@ -177,6 +326,22 @@ class App extends React.Component {
                     </Route>
                     <Route exact path="/services">
                         <ServiceList services={this.state.services}/>
+                    </Route>
+                    <Route exact path="/services/detail/:id">
+                        <ServiceDetail services={this.state.services}/>
+
+                    </Route>
+                    <Route exact path="/trainers">
+                        <TrainerList trainers={this.state.trainers}/>
+                    </Route>
+                    <Route exact path="/recordings">
+                        <RecordingList recordings={this.state.recordings}/>
+                    </Route>
+                    <Route exact path="/recordings/detail/:id">
+                        <RecordingDetail recordings={this.state.recordings}
+                                        users={this.state.users}
+                                        services={this.state.services}
+                                        trainers={this.state.trainers}/>
                     </Route>
                 </Router>
                 <Footer/>
