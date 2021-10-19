@@ -15,7 +15,7 @@ import axios from "axios";
 
 
 const API_URL = "http://localhost:8000"
-const getURL = (suffix) => `${API_URL}/api/${suffix}/`
+const getResourceURL = (suffix) => `${API_URL}/api/${suffix}/`
 
 
 class App extends React.Component {
@@ -31,7 +31,7 @@ class App extends React.Component {
 
     componentDidMount() {
         axios
-            .get(getURL("users"))
+            .get(getResourceURL("users"))
             .then((result) => {
                 // console.log('users result', result)
                 this.setState({
@@ -42,7 +42,7 @@ class App extends React.Component {
             .catch((error) => console.log(error));
 
         axios
-            .get(getURL("services"))
+            .get(getResourceURL("services"))
             .then((result) => {
                 // console.log('services result', result)
                 this.setState({
@@ -53,7 +53,7 @@ class App extends React.Component {
             .catch((error) => console.log(error));
 
         axios
-            .get(getURL("recordings"))
+            .get(getResourceURL("recordings"))
             .then((result) => {
                 // console.log('services result', result)
                 this.setState({
@@ -64,7 +64,7 @@ class App extends React.Component {
             .catch((error) => console.log(error));
 
         axios
-            .get(getURL("trainers"))
+            .get(getResourceURL("trainers"))
             .then((result) => {
                 // console.log('services result', result)
                 this.setState({
