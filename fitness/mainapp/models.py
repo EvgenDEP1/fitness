@@ -8,6 +8,7 @@ class Service(models.Model):
                                 max_digits=6, decimal_places=2, default=0)
     desc = models.TextField()
     status = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True, db_index=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -15,6 +16,12 @@ class Service(models.Model):
     class Meta:
         verbose_name = 'услуга'
         verbose_name_plural = 'услуги'
+
+    def delete(self, using=None, keep_parents=False):
+        self.is_active = False
+        self.name = f'_{self.name}'
+        self.save()
+        return 1, {}  # to fix
 
 
 class Trainer(models.Model):
@@ -49,7 +56,10 @@ class Recording(models.Model):
     user = models.ManyToManyField('authapp.UserProfile', related_name='serv_user')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'запись'
         verbose_name_plural = 'записи'
+
+

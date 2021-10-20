@@ -18,7 +18,8 @@ class TrainerList(ListView):
 
 
 class ServiceViewSet(ModelViewSet):
-    queryset = Service.objects.all()
+    # queryset = Service.objects.all()
+    queryset = Service.objects.filter(is_active=True)
     serializer_class = ServiceSerializer
 
 
