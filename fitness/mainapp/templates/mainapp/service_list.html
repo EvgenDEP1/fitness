@@ -5,10 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-<ul>
+<div class="user">
+    {% if user.is_authenticated %}
+        {{ user.username }}
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
     {% for service in service_list %}
-        <li>{{service}}</li>
+
+       {{service}}
     {% endfor %}
-</ul>
 </body>
 </html>

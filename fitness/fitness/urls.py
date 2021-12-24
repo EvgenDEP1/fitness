@@ -32,6 +32,8 @@ urlpatterns = [
     path('recording/',  mainapp.RecordingList.as_view()),
     path('trainer/',  mainapp.RecordingList.as_view()),
 
+    path('auth/login',  authapp.MyLogin.as_view(), name='login'),
+
     path('api/', include(router.urls)),
 
     path('admin/', admin.site.urls),
