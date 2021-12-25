@@ -11,11 +11,13 @@ import ServiceDetail from "./components/ServiceDetail";
 import RecordingList from "./components/RecordingList";
 import RecordingDetail from "./components/RecordingDetail";
 import TrainerList from "./components/TrainerList";
+import Main from "./components/Main";
+import LoginForm from "./components/LoginForm";
 import axios from "axios";
 
 
 const API_URL = "http://localhost:8000"
-const getResourceURL = (suffix) => `${API_URL}/api/${suffix}/`
+const getResourceURL = (suffix) => `${API_URL}/api/${suffix}/`;
 
 
 class App extends React.Component {
@@ -25,13 +27,22 @@ class App extends React.Component {
             users: [],
             services: [],
             recordings: [],
-            trainers: []
+            trainers: [],
+            accessToken: this.getAccessToken(),
         };
     }
 
     componentDidMount() {
+        this.loadState()
+    }
+
+    loadState() {
+        let headers = this.getHeaders();
+        // console.log('headers', headers);
+
+        // call rest API
         axios
-            .get(getResourceURL("users"))
+            .get(getResourceURL("users"), {headers: headers})
             .then((result) => {
                 // console.log('users result', result)
                 this.setState({
@@ -42,7 +53,7 @@ class App extends React.Component {
             .catch((error) => console.log(error));
 
         axios
-            .get(getResourceURL("services"))
+            .get(getResourceURL("services"), {headers: headers})
             .then((result) => {
                 // console.log('services result', result)
                 this.setState({
@@ -53,7 +64,7 @@ class App extends React.Component {
             .catch((error) => console.log(error));
 
         axios
-            .get(getResourceURL("recordings"))
+            .get(getResourceURL("recordings"), {headers: headers})
             .then((result) => {
                 // console.log('services result', result)
                 this.setState({
@@ -64,7 +75,7 @@ class App extends React.Component {
             .catch((error) => console.log(error));
 
         axios
-            .get(getResourceURL("trainers"))
+            .get(getResourceURL("trainers"), {headers: headers})
             .then((result) => {
                 // console.log('services result', result)
                 this.setState({
@@ -74,12 +85,64 @@ class App extends React.Component {
             })
             .catch((error) => console.log(error));
 
-        // this.setState({
-                // users: usersMock,
-                // services: servicesMock,
-                // recordings: recordingsMock,
-                // trainers: trainersMock
-            // })
+
+    }
+
+    login(username, password) {
+        // console.log('do login', username, password);
+        axios
+            .post(getResourceURL("token"),
+                {"username": username, "password": password})
+            .then((result) => {
+                let refreshToken = result.data.refresh;
+                let accessToken = result.data.access;
+                console.log(accessToken)
+
+                this.saveTokens(refreshToken, accessToken)
+                this.setState({accessToken: accessToken}, this.loadState)
+            })
+            .catch((error) => console.log(error));
+    }
+
+    logout() {
+        // console.log('do logout');
+        localStorage.setItem('refreshToken', null);
+        localStorage.setItem('accessToken', null);
+        this.clearState();
+    }
+
+    clearState() {
+        this.setState({
+            accessToken: null,
+            users: [],
+            services: [],
+            recordings: [],
+            trainers: [],
+        })
+    }
+
+    saveTokens(refreshToken, accessToken) {
+        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('accessToken', accessToken);
+    }
+
+    getAccessToken() {
+        return localStorage.getItem('accessToken')
+    }
+
+    isAuthenticated() {
+        return this.state.accessToken !== 'null' && this.state.accessToken !== null;
+    }
+
+    getHeaders() {
+        let headers = {
+            'Content-Type': "application/json"
+        }
+        if (this.isAuthenticated()) {
+            headers['Authorization'] = `Bearer ${this.state.accessToken}`
+        }
+
+        return headers;
     }
 
     render() {
@@ -87,7 +150,11 @@ class App extends React.Component {
         return (
             <div className="main">
                 <Router>
-                    <Header/>
+                    <Header isAuthenticated={this.isAuthenticated()}
+                            logout={() => this.logout()}/>
+                    <Route exact path="/">
+                        <Main/>
+                    </Route>
                     <Route exact path="/users">
                         <UserList users={this.state.users}/>
                     </Route>
@@ -109,6 +176,10 @@ class App extends React.Component {
                                         users={this.state.users}
                                         services={this.state.services}
                                         trainers={this.state.trainers}/>
+                    </Route>
+                    <Route exact path="/login">
+                        <LoginForm
+                            login={(username, password) => this.login(username, password)}/>
                     </Route>
                 </Router>
                 <Footer/>

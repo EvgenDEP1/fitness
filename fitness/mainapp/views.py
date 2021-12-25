@@ -18,6 +18,7 @@ class TrainerList(ListView):
 
 
 class ServiceViewSet(ModelViewSet):
+    permission_classes = [AllowAny]
     # queryset = Service.objects.all()
     queryset = Service.objects.filter(is_active=True)
     serializer_class = ServiceSerializer

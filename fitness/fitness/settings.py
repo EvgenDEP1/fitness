@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3th part apps
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
+    'rest_framework_simplejwt',
     # own apps
     'authapp',
     'mainapp',
@@ -132,13 +134,14 @@ LOGIN_REDIRECT_URL = '/'
 # CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    # "http://127.0.0.1:3000",
+    "http://127.0.0.1:3000",
     "http://localhost:3000",
 ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework.authentication.BasicAuthentication',
-#         'rest_framework.authentication.SessionAuthentication',
-#     ]
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
