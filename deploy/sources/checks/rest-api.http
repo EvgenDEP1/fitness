@@ -1,0 +1,11 @@
+#GET http://localhost:8000/api/services/
+#Accept: application/json
+
+
+GET http://localhost:8000/api/trainers/
+Accept: application/json
+
+###
+
+DELETE http://localhost:8000/api/services/6/
+Accept: application/json
