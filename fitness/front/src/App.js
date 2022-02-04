@@ -2,6 +2,7 @@
 import './App.css';
 import React from 'react';
 import {BrowserRouter as Router, NavLink as Link, Route} from 'react-router-dom';
+import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -13,7 +14,9 @@ import RecordingDetail from "./components/RecordingDetail";
 import TrainerList from "./components/TrainerList";
 import Main from "./components/Main";
 import LoginForm from "./components/LoginForm";
-import axios from "axios";
+import RegisterForm from "./components/RegisterForm";
+import UserDetail from "./components/UserDetail";
+
 
 
 const API_URL = "http://localhost:8000"
@@ -181,6 +184,11 @@ class App extends React.Component {
                         <LoginForm
                             login={(username, password) => this.login(username, password)}/>
                     </Route>
+
+                    <Route exact path="/register">
+                    <RegisterForm
+                        login={(username, password) => this.register(username, password)}/>
+                </Route>
                 </Router>
                 <Footer/>
             </div>

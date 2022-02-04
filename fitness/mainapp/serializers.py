@@ -1,7 +1,8 @@
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from mainapp.models import Service, Recording, Trainer
-# from authapp.models import UserProfile
+from authapp.models import UserProfile
 
 
 class ServiceSerializer(ModelSerializer):
@@ -31,3 +32,23 @@ class TrainerSerializer(ModelSerializer):
 #             'last_name',
 #             'username',
 #         )
+
+class UserProfileSerializer(ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = UserProfile
+        fields = (
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'password',
+            'phone_number'
+        )
+
+    def create(self, validated_data):
+        user = super(UserProfileSerializer, self).create(validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user

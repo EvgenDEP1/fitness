@@ -15,27 +15,33 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.authtoken.views import obtain_auth_token
+# from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 import authapp.views as authapp
 import mainapp.views as mainapp
+# from mainapp.views import UserProfileViewSet
+# from authapp.views import CreateUserView
 
 router = DefaultRouter()
-router.register('users', authapp.UserViewSet)
+# router.register('users', authapp.UserViewSet)
 router.register('services', mainapp.ServiceViewSet)
 router.register('recordings', mainapp.RecordingViewSet)
 router.register('trainers', mainapp.TrainerViewSet)
+router.register('users', mainapp.UserProfileViewSet)
+router.register('register', authapp.CreateUserView)
 
 
 urlpatterns = [
+
+
     path('service/',  mainapp.ServiceList.as_view()),
     path('recording/',  mainapp.RecordingList.as_view()),
     path('trainer/',  mainapp.RecordingList.as_view()),
 
-    path('auth/login',  authapp.MyLogin.as_view(), name='login'),
-    path('api-token-auth/', obtain_auth_token),
+    # path('auth/login',  authapp.MyLogin.as_view(), name='login'),
+    # path('api-token-auth/', obtain_auth_token),
 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

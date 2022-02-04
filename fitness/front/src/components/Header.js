@@ -42,6 +42,9 @@ function Header({isAuthenticated, logout}) {
                         {loginTitle}
                     </Link>
                 </li>
+
+                {!isAuthenticated && <li className="nav-item"><Link to={"/register"} className="nav-link"
+                >Заргистрироваться</Link></li>}
             </ul>
         </header>
     )
