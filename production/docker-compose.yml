@@ -1,9 +1,17 @@
 version: '3.2'
 
 services:
+  db:
+    image: postgres:13.1
+    privileged: true
+    env_file:
+      - .db.env
+
   backend:
     build:
-      context: .
+      context: ./backend
+    depends_on:
+      - db
     expose:
       - 8080
     command: bash -c "

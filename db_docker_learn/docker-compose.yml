@@ -4,12 +4,9 @@ services:
   db:
     image: postgres:13.1
     privileged: true
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: kpk
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: fitness
+    env_file:
+      - .db.env
+
   adminer:
     image: adminer:4.7.8-standalone
     restart: always

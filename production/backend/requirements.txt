@@ -4,3 +4,4 @@ djangorestframework==3.12.4
 djangorestframework_simplejwt==5.0.0
 django-cors-headers==3.10.0
 Markdown==3.3.4
+psycopg2-binary
