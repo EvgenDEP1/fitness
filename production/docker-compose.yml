@@ -5,7 +5,7 @@ services:
     image: postgres:13.1
     privileged: true
     env_file:
-      - ../db_docker_learn/.db.env
+      - .db.env
 
   backend:
     build:
