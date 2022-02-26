@@ -19,7 +19,7 @@ import UserDetail from "./components/UserDetail";
 
 
 
-const API_URL = "http://localhost:8000"
+const API_URL = "http://localhost:8001"
 const getResourceURL = (suffix) => `${API_URL}/api/${suffix}/`;
 
 

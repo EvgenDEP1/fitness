@@ -5,7 +5,7 @@ services:
     image: postgres:13.1
     privileged: true
     env_file:
-      - .db.env
+      - ../db_docker_learn/.db.env
 
   backend:
     build:
@@ -13,23 +13,23 @@ services:
     depends_on:
       - db
     expose:
-      - 8080
+      - 8081
     command: bash -c "
       python manage.py makemigrations &&
       python manage.py migrate &&
-      gunicorn fitness.wsgi -b 0.0.0.0:8080
+      gunicorn fitness.wsgi -b 0.0.0.0:8081
       "
 
   nginx:
     build: ./nginx
     ports:
-      - 8000:80
+      - 8001:80
     depends_on:
       - backend
 
   frontend:
     build: ./frontend
     ports:
-      - 85:80
+      - 86:80
     depends_on:
       - nginx
